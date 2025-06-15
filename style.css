@@ -1,285 +1,249 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
 * {
-        box-sizing: border-box;
-      }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
 
-      html,
-      body {
-        height: 100%;
-      }
+:root {
+  --text-color: #edf3ff;
+  --subheading-color: #97a7ca;
+  --placeholder-color: #c3cdde;
+  --primary-color: #101623;
+  --secondary-color: #283045;
+  --secondary-hover-color: #333e58;
+  --scrollbar-color: #626a7f;
+}
 
-      .container {
-        min-height: 100%;
-      }
+body.light-theme {
+  --text-color: #090c13;
+  --subheading-color: #7b8cae;
+  --placeholder-color: #606982;
+  --primary-color: #f3f7ff;
+  --secondary-color: #dce6f9;
+  --secondary-hover-color: #d2ddf2;
+  --scrollbar-color: #a2aac2;
+}
 
-      body {
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
-        background: #0a0a0a;
-      }
+body {
+  color: var(--text-color);
+  background: var(--primary-color);
+}
 
-      h2,
-      h3 {
-        margin: 0;
-      }
+.container {
+  overflow-y: auto;
+  padding: 32px 0 60px;
+  height: calc(100vh - 127px);
+  scrollbar-color: var(--scrollbar-color) transparent;
+}
 
-      button {
-        cursor: pointer;
-        outline: none;
-      }
+.container :where(.app-header, .suggestions, .message, .prompt-wrapper) {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 20px;
+  max-width: 990px;
+}
 
-      .container {
-        position: relative;
-        padding: 1rem 1rem 4rem;
-        background: #000000;
-      }
+.app-header {
+  margin-top: 3vh;
+  transition: 0.3s ease;
+}
 
-      @media only screen and (min-width: 500px) {
-        .container {
-          max-width: 420px;
-          margin: 0 auto;
-        }
-      }
+.heading {
+    font-size: 3rem;
+    background: linear-gradient(to right,
+      #4796E3 0%,
+      #9177C7 65%,
+      #CA6673 92%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  
 
-      .topbar-date {
-        letter-spacing: 1px;
-        font-weight: 500;
-        font-size: 0.7rem;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.5);
-      }
+.sub-heading {
+  font-size: 2.6rem;
+  margin-top: -5px;
+  color: var(--subheading-color);
+}
 
-      .topbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 1rem;
-      }
+.suggestions {
+  display: flex;
+  gap: 15px;
+  margin-top: 9.5vh;
+  overflow-x: auto;
+  list-style: none;
+  transition: opacity 0.3s ease;
+}
 
-      .topbar-h2 {
-        font-weight: 500;
-        font-size: 1.5rem;
-        color: rgba(255, 255, 255, 0.96);
-      }
+.suggestions .suggestions-item {
+  padding: 18px;
+  width: 228px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: var(--secondary-color);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
 
-      .topbar-icon {
-        font-size: 2rem;
-        color: #3a82f7;
-      }
+.suggestions .suggestions-item:hover {
+  background: var(--secondary-hover-color);
+}
 
-      .card {
-        overflow: hidden;
-        transform: translateZ(0);
-        margin-bottom: 1.5rem;
-      }
+.suggestions .icon {
+  margin-top: 25px;
+  width: 45px;
+  height: 45px;
+  font-size: 1.4rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--primary-color);
+}
 
-      .card-content {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        padding: 1rem;
-        max-height: 4rem;
-        border-bottom-left-radius: 0.5rem;
-        border-bottom-right-radius: 0.5rem;
-        background: #1c1c1d;
-      }
+.chats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
-      .card-content.top {
-        display: block;
-        max-height: 1000px;
-        border-radius: 0;
-        border-top-left-radius: 0.5rem;
-        border-top-right-radius: 0.5rem;
-      }
+.message {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
 
-      .card-banner-half {
-        position: relative;
-        min-height: 240px;
-        padding: 1rem;
-        background-size: 100%;
-        background-repeat: no-repeat;
-        border-bottom-left-radius: 0.5rem;
-        border-bottom-right-radius: 0.5rem;
-      }
+.message img.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+}
 
-      .card-banner-half.lego {
-        background-image: url("https://cdn.jsdelivr.net/gh/frontend-joe/assets@main/app-store-2.png");
-      }
+.message.loading img.avatar {
+  animation: rotate 2s linear infinite;
+}
 
-      .card-banner-full {
-        position: relative;
-        min-height: 240px;
-        padding: 1rem;
-        background-size: 100%;
-        background-repeat: no-repeat;
-      }
+@keyframes rotate {
+  100% { transform: rotate(360deg); }
+}
 
-      .card-banner-full.discord {
-        background-image: url("https://cdn.jsdelivr.net/gh/frontend-joe/assets@main/app-store-1.png");
-      }
+.message-bubble {
+  max-width: 75%;
+}
 
-      .card-banner-full.tinder {
-        background-position: 0 40px;
-        background-image: url("https://cdn.jsdelivr.net/gh/frontend-joe/assets@main/app-store-3.png");
-      }
+.message-text {
+  background: var(--secondary-color);
+  padding: 12px 16px;
+  border-radius: 13px;
+  line-height: 1.4;
+}
 
-      .card-banner-full::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(#000 20%, rgba(0, 0, 0, 0));
-      }
+.prompt-container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: var(--primary-color);
+  padding: 16px 0;
+}
 
-      .card-banner-h3 {
-        font-size: 0.75rem;
-        font-weight: 500;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.5);
-        margin-bottom: 0.3rem;
-      }
+.prompt-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 auto;
+  padding: 0 20px;
+  max-width: 990px;
+}
 
-      .card-banner-h2 {
-        font-size: 1.5rem;
-        font-weight: 500;
-        color: rgba(255, 255, 255, 0.96);
-        margin-right: 5rem;
-      }
+.prompt-form {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  background: var(--secondary-color);
+  border-radius: 130px;
+  height: 50px;
+}
 
-      .card-banner-content {
-        position: relative;
-        z-index: 1;
-      }
+.prompt-input {
+  flex: 1;
+  height: 100%;
+  background: none;
+  outline: none;
+  border: none;
+  font-size: 0.95rem;
+  color: var(--text-color);
+  padding-left: 16px;
+}
 
-      .app-info {
-        flex: 1 1 auto;
-        min-width: 0;
-      }
+.prompt-actions {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
 
-      .app-h2 {
-        margin-bottom: 0.175rem;
-        font-size: 0.8rem;
-        font-weight: 500;
-        color: rgba(255, 255, 255, 0.96);
-      }
+.prompt-actions button {
+    background: var(--button-color);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  /* Override for theme + delete buttons */
+  #theme-toggle-btn,
+  #delete-chats-btn {
+    background: transparent;
+    border: 2px solid var(--button-color);
+    color: var(--button-color);
+    transition: 0.2s ease;
+  }
+  
+  #theme-toggle-btn:hover,
+  #delete-chats-btn:hover {
+    background: var(--button-color);
+    color: #fff;
+  }
+  
 
-      .app-h3 {
-        font-size: 0.625rem;
-        font-weight: 300;
-        color: rgba(255, 255, 255, 0.5);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 100%;
-      }
+.disclaimer-text {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 6px;
+  color: var(--placeholder-color);
+}
 
-      .app-button {
-        height: 1.25rem;
-        width: 4.5rem;
-        margin-bottom: 0.25rem;
-        border: 0;
-        border-radius: 1.5rem;
-        font-weight: 600;
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        background: #313135;
-        color: #3a82f7;
-      }
+/* Blinking bars */
+.loading-indicator {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+  padding-left: 5px;
+}
 
-      .app-button-label {
-        font-size: 0.5rem;
-        font-weight: 300;
-        color: rgba(255, 255, 255, 0.5);
-      }
+.loading-bar {
+  width: 5px;
+  height: 18px;
+  background: #ccc;
+  border-radius: 4px;
+  animation: blink 1s infinite ease-in-out;
+}
 
-      .material-icons {
-        padding: 0.25rem;
-        border-radius: 0.4rem;
-      }
+.loading-bar:nth-child(2) { animation-delay: 0.2s; }
+.loading-bar:nth-child(3) { animation-delay: 0.4s; }
 
-      .icon-tinder {
-        background: linear-gradient(45deg, #ec7660, #e7407c);
-        color: #f9f9f9;
-      }
-
-      .icon-discord {
-        background: #5861ed;
-        color: #f9f9f9;
-      }
-
-      .nav {
-        position: fixed;
-        z-index: 3;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        align-items: center;
-        height: 4rem;
-        width: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(15px);
-        padding-bottom: 1.25rem;
-      }
-
-      .nav::after {
-        content: "";
-        position: absolute;
-        bottom: 0.6rem;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 10rem;
-        height: 4px;
-        border-radius: 2px;
-        background: #f9f9f9;
-      }
-
-      @media only screen and (min-width: 500px) {
-        .nav {
-          max-width: 420px;
-        }
-      }
-
-      .nav button {
-        position: relative;
-        flex: 1 1 auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        border: 0;
-        background: transparent;
-      }
-
-      .nav button.active .button-text,
-      .nav button.active .material-icons {
-        color: #3a82f7;
-      }
-
-      .nav button .material-icons,
-      .nav button .button-text {
-        color: rgba(255, 255, 255, 0.6);
-      }
-
-      .nav button .material-icons {
-        font-size: 1.25rem;
-      }
-
-      .nav button .button-text {
-        font-size: 0.6rem;
-      }
-
-      .nav button .badge {
-        position: absolute;
-        top: 3px;
-        right: 1.3rem;
-        display: grid;
-        place-items: center;
-        width: 0.8rem;
-        height: 0.8rem;
-        border-radius: 50%;
-        background: #eb5545;
-        color: #f9f9f9;
-        font-size: 0.6rem;
-      }
+@keyframes blink {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
+  50% { opacity: 1; transform: scaleY(1.2); }
+} css 
